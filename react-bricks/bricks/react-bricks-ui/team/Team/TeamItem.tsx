@@ -1,15 +1,11 @@
-import classNames from 'classnames'
 import * as React from 'react'
 import { Image, types, Text } from 'react-bricks/frontend'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
-import { FiTwitter, FiLinkedin, FiGithub } from 'react-icons/fi'
-import { textColors } from '../../colors'
-import { LayoutProps } from '../../LayoutSideProps'
 import { avatars } from '../../shared/defaultImages'
 
 import blockNames from '../../blockNames'
 
-export interface TeamItemProps extends LayoutProps {
+export interface TeamItemProps {
   twitter?: string
   github?: string
   linkedin?: string
@@ -27,100 +23,94 @@ const TeamItem: types.Brick<TeamItemProps> = ({
   jobTitle,
 }) => {
   return (
-    <div className="flex flex-col items-center">
-      <Image
-        propName="picture"
-        alt="team-item"
-        source={picture}
-        aspectRatio={1}
-        imageClassName={classNames(
-          'block w-[72px] h-[72px] object-contain rounded-full mb-1'
-        )}
-      />
+    <div className="relative flex flex-row items-stretch border border-gray-500  max-w-4xl mx-auto overflow-hidden mb-8"> {/* Container with border and rounded corners */}
+      
+      {/* Image Section */}
+     
+      <div className="w-2/3 flex-shrink-0 overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105">
+        <Image
+          propName="picture"
+          alt="team-item"
+          source={picture}
+          aspectRatio={1}
+          imageClassName="w-full h-full object-cover hover: w-calc[(100% - 10px)]" // Ensure image fills container
+        />
+      </div>
 
-      <Text
-        renderBlock={(props) => (
-          <div
-            className={classNames(
-              'text-sm font-bold text-center min-w-[70px]',
-              textColors.GRAY_800
+      {/* Info Box (Right side of image) */}
+      
+      <div className="w-1/3 bg-[#d9b38c] p-6 flex flex-col justify-between transition-all duration-300 ease-in-out hover:w-[calc(100%+20px)]  hover:relative hover:left-[-20px] h-full "> {/* Expands on hover */}
+        <div className="text-left flex-grow">
+          {/* Name */}  
+          <Text
+            renderBlock={(props) => (
+              <h4 className="text-xl font-bold mb-2">{props.children}</h4>
             )}
-          >
-            {props.children}
-          </div>
-        )}
-        placeholder="Name..."
-        propName="memberName"
-        value={memberName}
-      />
-      <Text
-        renderBlock={(props) => (
-          <div className="text-xs text-center text-gray-500 dark:text-white/70 min-w-[70px]">
-            {props.children}
-          </div>
-        )}
-        placeholder="Role..."
-        propName="jobTitle"
-        value={jobTitle}
-      />
+            propName="memberName"
+            value={memberName}
+            placeholder="Name..."
+          />
+          {/* Role */}
+          <Text
+            renderBlock={(props) => (
+              <p className="text-md text-gray-700 mb-4">{props.children}</p>
+            )}
+            propName="jobTitle"
+            value={jobTitle}
+            placeholder="Role..."
+          />
+        </div>
 
-      {(twitter || linkedin || github) && (
-        <div className="flex flex-row justify-center space-x-2 mt-2">
+        {/* Social Media Icons */}
+        <div className="flex flex-row space-x-4 mt-4">
           {twitter && (
-            <div className="hover:text-sky-500 hover:-translate-y-px transition-all ease-out duration-150 text-gray-400 dark:text-gray-400 dark:hover:text-gray-200">
-              <a
-                href={`https://twitter.com/${twitter}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter />
-              </a>
-            </div>
+            <a
+              href={`https://twitter.com/${twitter}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-sky-500"
+            >
+              <FaTwitter />
+            </a>
           )}
           {linkedin && (
-            <div className="hover:text-sky-500 hover:-translate-y-px transition-all ease-out duration-150 text-gray-400 dark:text-gray-400 dark:hover:text-gray-200">
-              <a
-                href={`https://linkedin.com/${linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin />
-              </a>
-            </div>
+            <a
+              href={`https://linkedin.com/in/${linkedin}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-sky-500"
+            >
+              <FaLinkedin />
+            </a>
           )}
           {github && (
-            <div className="hover:text-sky-500 hover:-translate-y-px transition-all ease-out duration-150 text-gray-400 dark:text-gray-400 dark:hover:text-gray-200">
-              <a
-                href={`https://github.com/${github}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub />
-              </a>
-            </div>
+            <a
+              href={`https://github.com/${github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-sky-500"
+            >
+              <FaGithub />
+            </a>
           )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
 
 TeamItem.schema = {
   name: blockNames.TeamItem,
-  label: 'Member',
+  label: 'Team Member',
   category: 'team',
-  hideFromAddMenu: true,
-  playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/ReactBricks/react-bricks-ui/blob/master/src/website/Team/TeamItem.tsx',
 
   getDefaultProps: () => ({
-    memberName: 'Matteo Frana',
-    jobTitle: 'Founder and CEO',
-    twitter: 'matfrana',
+    memberName: 'John Doe',
+    jobTitle: 'Software Engineer',
+    twitter: '',
     github: '',
     linkedin: '',
-    picture: avatars.MATTEO_FRANA,
+    picture: avatars.USER,
   }),
   sideEditProps: [
     {

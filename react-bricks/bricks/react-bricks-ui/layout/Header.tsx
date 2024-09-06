@@ -64,7 +64,7 @@ const Header: types.Brick<HeaderProps> = ({
       backgroundColor={backgroundColor}
       borderBottom={borderBottom ? 'full' : 'none'}
     >
-      <nav className="py-5 px-5 sm:mx-[5.55555%] xl:mx-[11.1111%] flex justify-start items-center">
+      <nav className="py-5 px-5 sm:mx-[5.55555%] xl:mx-[11.1111%] flex justify-between items-center">
         <Link
           href="/"
           aria-label="home"
@@ -75,7 +75,7 @@ const Header: types.Brick<HeaderProps> = ({
             alt="Logo"
             source={logo}
             maxWidth={300}
-            imageClassName="block w-32 h-7 object-contain object-left"
+            imageClassName="block w-32 h-10 object-contain object-right "
           />
         </Link>
         <div className="hidden lg:flex items-center space-x-2">
@@ -104,7 +104,7 @@ const Header: types.Brick<HeaderProps> = ({
           />
         </div>
 
-        {/* DARK MODE BUTTON DESKTOP */}
+        {/* DARK MODE BUTTON DESKTOP
         {mounted && (
           <button
             type="button"
@@ -117,11 +117,11 @@ const Header: types.Brick<HeaderProps> = ({
               <BsSunFill className="text-xl" />
             )}
           </button>
-        )}
+        )} */}
 
         <div
           ref={ref}
-          className="relative lg:hidden flex items-center h-full sm:gap-x-4"
+          className="relative lg:hidden flex items-center ml-auto"
         >
           <button
             className="group p-1 w-7 h-7 flex justify-center items-center rounded-[5px] bg-gray-200 dark:bg-transparent hover:bg-sky-500/20 dark:hover:bg-sky-500/40 hover:text-sky-600 dark:hover:text-sky-500 focus:bg-sky-500/20 dark:focus:bg-sky-500/40 focus:text-sky-600 dark:focus:text-sky-500"

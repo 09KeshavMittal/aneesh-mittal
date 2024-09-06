@@ -55,14 +55,14 @@ const Team: types.Brick<TeamProps> = ({
             subtitle={subtitle}
           />
         )}
-        <div
-          className={classNames(
-            'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8',
-            {
-              'lg:grid-cols-5 lg:gap-10 xl:grid-cols-6': width === 'medium',
-            }
-          )}
-        >
+          <div
+            className={classNames(
+              'grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8',
+              {
+                'lg:grid-cols-3 lg:gap-10 xl:grid-cols-3': width === 'medium',
+              }
+            )}
+          >
           <Repeater propName="members" items={members} />
         </div>
       </Container>
